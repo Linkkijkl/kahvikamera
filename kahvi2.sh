@@ -7,5 +7,5 @@ ffmpeg -y -f video4linux2 -i /dev/video0 -q:v 1 -vframes 1 ~/kahvikamera/kuva.jp
 
 sleep 5
 # koneelle oma githubkäyttäjä? deploy keyllä onnistui
-git commit -am "kuva kahvi_pannusta `date`"
+git commit -am "kuva kahvipannusta `date`"
 git push
