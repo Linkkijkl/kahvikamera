@@ -5,20 +5,12 @@ import subprocess
 import time
 from datetime import datetime
 import time
-from enum import IntEnum
-
-class Loglevel(IntEnum):
-    SILENT = 0
-    ERROR = 1
-    LOG = 2
-    VERBOSE = 3
-    DEFAULT = 0
 
 def send_image_to_server(imgPath):
     try:
         subprocess.run(['scp', imgPath,'root@kattila.cafe:~/kahvikamera/static/images/'], capture_output=True)
     except subprocess.CalledProcessError as e:
-        log_error(f'An error occured: {str(e)}')
+        print(f'An error occured: {str(e)}')
 
 # Whitebalances outgoing image, writes image to 'kahvi.jpg'
 def publication_postprocess(img):
@@ -37,7 +29,7 @@ def publication_postprocess(img):
 
 
 # Mean square error
-def mse(img1, img2, loglevel = Loglevel.DEFAULT):
+def mse(img1, img2):
     s = time.time()
     h, w = img1.shape
     diff = img1 - img2
@@ -45,7 +37,7 @@ def mse(img1, img2, loglevel = Loglevel.DEFAULT):
     ops = 3*h*w
     mse = err/(float(h*w))
     t = time.time() - s
-    log_verbose(ops, t, ops/t*10**12, loglevel)
+    print(ops, t, ops/t*10**12)
     return mse
 
 
@@ -78,25 +70,8 @@ def preprocess_capture(img):
     cv2.xphoto.dctDenoising(img, img, 8.0)
     return img
 
-def log_verbose(str, loglevel = Loglevel.DEFAULT):
-    if (loglevel >= Loglevel.VERBOSE):
-        t = time.strftime('%H:%M:%S')
-        print(f'LOG | {t:8} | {str}')
-
-def log(str, loglevel = Loglevel.DEFAULT):
-    if (loglevel >= Loglevel.LOG):
-        t = time.strftime('%H:%M:%S')
-        print(f'LOG | {t:8} | {str}')
-
-def log_error(str, loglevel = Loglevel.DEFAULT):
-    if (loglevel >= Loglevel.ERROR):
-        t = time.strftime('%H:%M:%S')
-        print(f'\033[1;31;40mERROR\033[1;37;40m | {t:8} | {str}')
-
 
 def main():
-    loglevel = Loglevel.SILENT
-    log_error("testi", loglevel)
     while True:
         try:
             newImg = preprocess_capture(capture_camera())
@@ -107,17 +82,17 @@ def main():
 
             difference = mse(cvNew, cvOld)
 
-            log(f'MSE: {difference}')
+            print(f'MSE: {difference}')
             if (difference > 5):
-                log("MSE yli 5, Kahvin tila muuttunut! Laitetaan uusi kuva.", loglevel)
+                print("MSE yli 5, Kahvin tila muuttunut! Laitetaan uusi kuva.")
                 cv2.imwrite('kahvi-local.jpg', newImg)
                 publication_postprocess(newImg)
                 send_image_to_server('kahvi.jpg')
             else:
-                log("Kahvin tila ei muuttunut. ei tehdä mitään.", loglevel)
+                print("Kahvin tila ei muuttunut. ei tehdä mitään.")
 
         except Exception as ex:
-            log_error(ex, loglevel)
+            print(ex)
 
         finally:
             time.sleep(5)
