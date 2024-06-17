@@ -1,4 +1,4 @@
 flask
 opencv-python
-ffmpeg
-numpy
+opencv-contrib-python
+numpy<2
