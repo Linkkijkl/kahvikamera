@@ -1,8 +1,9 @@
 # Kahvikamera
 
-https://kattila.cafe
+<https://kattila.cafe>
 
-TODO: 
+TODO:
+
 - SSH control socket
 - Parempi dokumentaatio
 - ~~Paranna kuvan laatu ottamalla keskiarvo~~
@@ -12,8 +13,6 @@ TODO:
 - ~~Server Side Rendering~~
 - ~~Kameran vieressä olevan lappusen linkissä olevan virheen korjaus~~ (partial fix)
 
-
 Miten kahvikamera toimii:
 
 ![toiminta](kattila/images/cafeSystem.png)
-
