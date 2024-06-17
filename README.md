@@ -1,6 +1,6 @@
 # Kahvikamera
 
-<https://kattila.cafe>
+Hosted at: <https://kattila.cafe>
 
 TODO:
 
@@ -13,6 +13,6 @@ TODO:
 - ~~Server Side Rendering~~
 - ~~Kameran vieressä olevan lappusen linkissä olevan virheen korjaus~~ (partial fix)
 
-Miten kahvikamera toimii:
+## Miten kahvikamera toimii
 
 ![toiminta](kattila/images/cafeSystem.png)
