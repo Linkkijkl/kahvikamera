@@ -10,6 +10,9 @@ def send_image_to_server(imgPath):
 
 # Whitebalances outgoing image, writes image to 'kahvi.jpg'
 def publication_postprocess(img: cv2.typing.MatLike) -> cv2.typing.MatLike:
+
+    # Rotate
+    img = rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
     
     # Whitebalancing
     wb = cv2.xphoto.createSimpleWB()
