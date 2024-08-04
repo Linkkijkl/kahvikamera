@@ -2,17 +2,16 @@
 
 Hosted at: <https://kattila.cafe>
 
-Kattilan kamerapalvelimen tilanne:
-- systemd service kahvikamera.service luotu, vaihdettava käynnistämään käyttäjänä 'a'
-- käyttäjän (ryhmä)oikeuksia lisättävä tarvittaessa, jotta olisi oikeus videolaitteisiin.
-- käynnistetään tällä loitsulla `start.sh`, mikä on palvelinkoneella tilapäisesti vain paikallisesti
-
 TODO:
 
-- Kuvan tallennus ennen lähetystä välimuistiin levyn sijaan.
 - SSH control socket
 - Parempi dokumentaatio
+- ~~Paranna kuvan laatu ottamalla keskiarvo~~
+- ~~UI dysleksia ystävällisemmäksi~~
+- ~~Linkki repoon~~
 - Kahvin määrän arviointi
+- ~~Server Side Rendering~~
+- ~~Kameran vieressä olevan lappusen linkissä olevan virheen korjaus~~ (partial fix)
 
 ## Miten kahvikamera toimii
 

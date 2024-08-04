@@ -1,74 +1,88 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, Response
+from pathlib import Path
 import time
+from queue import Queue
 
 app = Flask(__name__)
-halukkaat = []
-HALUKKAATMAX = 10
+HALUKKAATMAX: int = 10
+halukkaat: Queue[float] = Queue(HALUKKAATMAX)
 
-#========= tietokanta =========
+DATA_HAKEMISTO = Path("data")
+NIMET_TXT = Path("names.txt")
 
-def poista_vanhat_halukkaat():
-    global halukkaat
-    timestamp = time.time()
-    temp = []
-    for h in halukkaat:
-        if (timestamp - h < 15*60):
-            temp.append(h)
-    halukkaat = temp
 
-def lisaa_uusi_halukas():
-    global halukkaat
-    timestamp = time.time()
-    poista_vanhat_halukkaat()
-    if len(halukkaat) >= HALUKKAATMAX:
-        halukkaat.pop(0)
-    halukkaat.append(timestamp)
+def virkista_halukkaat(halukkaat: Queue[float]):
+    # Queue's get() method pops the queue's next item, and there is
+    # no peek method this is why q.queue[0] is checked this way.
+    app.logger.info("Virkistetään halukkaat")
+    while not halukkaat.empty() \
+        and halukkaat.queue[0] - time.time() > 15*60:
+        halukkaat.get()
 
-#========= main =========
 
-def halukkaatstr():
-    halukkaatstr = "Halukkaat"
-    halukkaatlkm = len(halukkaat)
-    if   (halukkaatlkm == 3):  halukkaatstr = halukkaatstr + f" :{halukkaatlkm}"
-    elif (halukkaatlkm >= HALUKKAATMAX): halukkaatstr = halukkaatstr + f": {halukkaatlkm} (max)"
-    else:                      halukkaatstr = halukkaatstr + f": {halukkaatlkm}"
-    return halukkaatstr
+def lisaa_uusi_halukas(halukkaat: Queue[float]):
+    virkista_halukkaat(halukkaat)
+    app.logger.info("Lisätään halukas")
+    halukkaat.put(time.time())
+
+
+def halukkaatstr(lkm: int) -> str:
+    match lkm:
+        case 3:
+            return f"Halukkaat :{lkm} /{HALUKKAATMAX}"
+        case _:
+            return f"Halukkaat: {lkm}/{HALUKKAATMAX}"
+
+
+def hae_nimet() -> list[str]:
+    if not DATA_HAKEMISTO.is_dir():
+        app.logger.info("Datahakemistoa ei ole olemassa.")
+        return []
+    if not (DATA_HAKEMISTO/NIMET_TXT).is_file():
+        app.logger.info("Nimitiedostoa ei ole olemassa.")
+        return []
+    app.logger.info("Haetaan nimet")
+    with open(DATA_HAKEMISTO/NIMET_TXT, "r") as nimi_tiedosto:
+        nimet = [nimi.strip() for nimi in nimi_tiedosto.readlines() if nimi.strip()]
+    return nimet
+
 
 @app.route('/kahvi',  methods=['POST'])
 def home():
-    if len(halukkaat) >= HALUKKAATMAX:
-        halukkaats = halukkaatstr() 
+    lkm = halukkaat.qsize()
+    if lkm >= HALUKKAATMAX:
+        halukkaats = halukkaatstr(lkm)
         return render_template('index.html', halukkaat=halukkaats), 418
 
-    lisaa_uusi_halukas()
+    lisaa_uusi_halukas(halukkaat)
     x = render_template('redirect.html')
     resp = Response(x)
-    resp.headers.add('Location', 'https://kattila.cafe')
+    resp.headers.add('Location', app.url_for('index'))
     return resp
 
+
 @app.route('/', methods=['GET'])
-def kissa():
-    poista_vanhat_halukkaat()
-    halukkaats = halukkaatstr() 
-    return render_template('index.html', halukkaat=halukkaats)
+def index():
+    virkista_halukkaat(halukkaat)
+    lkm = halukkaat.qsize()
+    halukkaats = halukkaatstr(lkm)
+    nimet = hae_nimet()
+    return render_template('index.html', halukkaat=halukkaats, nimet=nimet)
+
 
 @app.route('/favicon.ico')
 def favicon():
     return app.send_static_file('favicon.ico')
 
-@app.route('/display')
-def toinen_kissa():
-    poista_vanhat_halukkaat()
-    halukkaats = halukkaatstr() 
-    return render_template('display.html', halukkaat=halukkaats, halukkaatlkm=str(len(halukkaat))+"%")
 
 @app.route('/tietoa')
 def tietoa():
     return render_template('tietoa.html')
 
+
 def main():
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
 
 if __name__ == '__main__':
     main()
-

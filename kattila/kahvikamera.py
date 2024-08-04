@@ -1,19 +1,20 @@
 import cv2
 import subprocess
 import time
+from typing import Any
 
-def send_image_to_server(imgPath):
+
+def send_image_to_server(imgPath: str):
     try:
         subprocess.run(['scp', imgPath,'root@kattila.cafe:~/kahvikamera/web/static/images/'], capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f'An error occured: {str(e)}')
 
-# Whitebalances outgoing image, writes image to 'kahvi.jpg'
-def publication_postprocess(img: cv2.typing.MatLike) -> cv2.typing.MatLike:
 
+def publication_postprocess(img: cv2.typing.MatLike) -> cv2.typing.MatLike:
     # Rotate
     img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    
+
     # Whitebalancing
     wb = cv2.xphoto.createSimpleWB()
     outboundImg = wb.balanceWhite(img)
@@ -25,34 +26,39 @@ def publication_postprocess(img: cv2.typing.MatLike) -> cv2.typing.MatLike:
     timestamp = time.strftime('%H:%M:%S')
     originOffest = 10
     # Get text height for aligning top left
-    (w, h), bl = cv2.getTextSize(text = timestamp,
+    size = cv2.getTextSize(text = timestamp,
                                  fontFace = fontFace,
                                  fontScale = fontScale,
                                  thickness = thickness)
     outboundImg = cv2.putText(img = outboundImg,
                               text = timestamp,
-                              org = (originOffest,originOffest+h),
+                              org = (originOffest,originOffest+size[0][1]),
                               fontFace = fontFace,
                               fontScale = fontScale,
                               color = (255,255,255),
                               thickness = thickness)
-
     return outboundImg
 
-def capture_camera() -> cv2.typing.MatLike:
-    try:
-        cam = cv2.VideoCapture(0)
 
-        if not cam.isOpened():
-            raise IOError("Cannot open webcam")
-        
-        (ret, capImg) = cam.read()
-        return capImg
-    
-    finally:
-        cam.release()
+def capture_camera() -> cv2.typing.MatLike:
+    cam: cv2.VideoCapture = cv2.VideoCapture(0)
+    cap = cam.read()
+    cam.release()
+    return cap[1]
+
+
+def describe_camera() -> int:
+    props: dict[Any, Any] = {}
+    cam: cv2.VideoCapture = cv2.VideoCapture(0)
+    print(f"Camera Backend: {cam.getBackendName()}")
+    for (prop_name, prop_value) in props:
+        print(f"Setting {prop_name}: {prop_value}")
+    cam.release()
+    return len(props)
+
 
 def main():
+    describe_camera()
     while True:
         try:
             newImg = capture_camera()
@@ -65,6 +71,7 @@ def main():
 
         finally:
             time.sleep(5)
+
 
 if __name__ == '__main__':
     main()
