@@ -1,8 +1,11 @@
+from flask import Flask, render_template, Response
 from pathlib import Path
 import time
 from queue import Queue
 
 app = Flask(__name__)
+HALUKKAATMAX: int = 10
+halukkaat: Queue[float] = Queue(HALUKKAATMAX)
 
 DATA_HAKEMISTO = Path("data")
 NIMET_TXT = Path("names.txt")
@@ -57,7 +60,9 @@ def home():
     resp.headers.add('Location', app.url_for('index'))
     return resp
 
+
 @app.route('/', methods=['GET'])
+def index():
     virkista_halukkaat(halukkaat)
     lkm = halukkaat.qsize()
     halukkaats = halukkaatstr(lkm)
@@ -69,11 +74,6 @@ def home():
 def favicon():
     return app.send_static_file('favicon.ico')
 
-@app.route('/display')
-def toinen_kissa():
-    poista_vanhat_halukkaat()
-    halukkaats = halukkaatstr() 
-    return render_template('display.html', halukkaat=halukkaats, halukkaatlkm=str(len(halukkaat))+"%")
 
 @app.route('/tietoa')
 def tietoa():
