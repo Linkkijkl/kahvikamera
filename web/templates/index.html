@@ -1,72 +1,58 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Coffee cam</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<style>
-  body {
-    background-color: #AE8B6C;
-  }
-</style>
-
-<body>
-  <div id="background-coffee"></div>
-  <div id="content">
-    <h1 id="otsikko">Kattilan kahvikamera</h1>
-    <p id="aika"></p>
-    <img id="kuva" src="{{ url_for('static', filename='images/kahvi.jpg') }}" alt="Coffee Cam">
-    <form method="post" action="/kahvi" id="kahvi-form">
-      <button id="painike" type="submit" value="Haluan kahvia" name="Submit"><span id="kahvinappitxt">Haluan
-          kahvia</span></button>
-    </form>
-    <p id="halukkaat">{{ halukkaat }}</p>
-    <div id="repo">
-      <a href="https://github.com/teemupaloniemi/kahvikamera">kahvikamera repo</a>
-    </div>
-    <!--
-    <div id="display">
-      <a href="https://kattila.cafe/display">Näyttötaulutila</a>
-    </div>
-    -->
-  </div>
-  <script>
-
+{% extends 'base.html' %} {% block scripts -%}
+<script id="reloads">
     function displayTime() {
-      const now = new Date();
-      const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      const timeString = now.toLocaleTimeString(undefined, options);
-      document.getElementById('aika').textContent = "Kahvin tila tarkistettu: " + timeString;
+        const now = new Date();
+        const options = {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+        };
+        const timeString = now.toLocaleTimeString(undefined, options);
+        document.getElementById("tarkistusaika").textContent = "Kahvin tila tarkistettu: " + timeString;
     }
 
-    // Call the function when the page loads
-    displayTime();
-
     function updateImage() {
-      const imageUrl = "{{ url_for('static', filename='images/kahvi.jpg') }}";
-      const newImageUrl = imageUrl + "?t=" + new Date().getTime();
+        const imageUrl = "{{ url_for('static', filename='images/kahvi.jpg') }}";
+        const newImageUrl = imageUrl + "?t=" + new Date().getTime();
 
-      document.getElementById('kuva').src = newImageUrl;
-      displayTime();
+        document.getElementById("kahvikuva").src = newImageUrl;
+        displayTime();
     }
 
     // This is for updating the count of submits
     function updatePage() {
-      location.reload(true);
+        location.reload(true);
     }
 
     setInterval(updateImage, 10000);
     setInterval(updatePage, 100000);
-
-  </script>
-</body>
-
-</html>
+</script>
+{% endblock -%} {% block body -%}
+<div class="container">
+    <h1 id="otsikko">Kattilan kahvikamera</h1>
+    <div class="flexrow">
+        <div id="kahvitiedot" class="container">
+            <p id="tarkistusaika"></p>
+            <img id="kahvikuva" src="{{ url_for('static', filename='images/kahvi.jpg') }}" alt="Coffee Cam" />
+            <form method="post" action="/kahvi" id="kahvi-form">
+                <button id="painike" type="submit" value="Haluan kahvia" name="Submit">
+                    <span id="kahvinappitxt">Haluan kahvia</span>
+                </button>
+            </form>
+            <p id="halukkaat">{{ halukkaat }}<script>displayTime();</script></p>
+        </div>
+        {% if nimet -%}
+        <div id="nimitiedot">
+            <h2 id="nimiotsikko">Kattilassa paikalla:</h2>
+            <ul class="nimilista">
+                {% for nimi in nimet -%}
+                <li class="nimi">{{ nimi }}</li>
+                {% endfor -%}
+            </ul>
+        </div>
+    </div>
+    {% endif -%}
+    <p><a href="https://github.com/45spoons/kahvikamera">repo</a> forked from <a href="https://github.com/teemupaloniemi/kahvikamera">the og</a></p>
+</div>
+{% endblock -%}
