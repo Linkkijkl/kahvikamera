@@ -19,6 +19,14 @@ def lisaa_uusi_halukas(halukkaat: Queue[float]):
     halukkaat.put(time.time())
 
 
+def halukkaatstr(lkm: int) -> str:
+    match lkm:
+        case 3:
+            return f"Halukkaat :{lkm} /{HALUKKAATMAX}"
+        case _:
+            return f"Halukkaat: {lkm}/{HALUKKAATMAX}"
+
+
 @app.route('/kahvi',  methods=['POST'])
 def home():
     lkm = halukkaat.qsize()
