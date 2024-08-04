@@ -6,12 +6,15 @@ from typing import Any
 
 def send_image_to_server(imgPath: str):
     try:
-        pass #subprocess.run(['scp', imgPath,'root@kattila.cafe:~/kahvikamera/static/images/'], capture_output=True)
+        subprocess.run(['scp', imgPath,'root@kattila.cafe:~/kahvikamera/web/static/images/'], capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f'An error occured: {str(e)}')
 
 
 def publication_postprocess(img: cv2.typing.MatLike) -> cv2.typing.MatLike:
+    # Rotate
+    img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+
     # Whitebalancing
     wb = cv2.xphoto.createSimpleWB()
     outboundImg = wb.balanceWhite(img)
