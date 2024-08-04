@@ -54,7 +54,7 @@ def home():
     lisaa_uusi_halukas(halukkaat)
     x = render_template('redirect.html')
     resp = Response(x)
-    resp.headers.add('Location', 'https://kattila.cafe')
+    resp.headers.add('Location', app.url_for('index'))
     return resp
 
 @app.route('/', methods=['GET'])
