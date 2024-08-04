@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request, Response
+from pathlib import Path
 import time
 from queue import Queue
 
 app = Flask(__name__)
+
+DATA_HAKEMISTO = Path("data")
+NIMET_TXT = Path("names.txt")
+
 
 def virkista_halukkaat(halukkaat: Queue[float]):
     # Queue's get() method pops the queue's next item, and there is
@@ -27,6 +31,19 @@ def halukkaatstr(lkm: int) -> str:
             return f"Halukkaat: {lkm}/{HALUKKAATMAX}"
 
 
+def hae_nimet() -> list[str]:
+    if not DATA_HAKEMISTO.is_dir():
+        app.logger.info("Datahakemistoa ei ole olemassa.")
+        return []
+    if not (DATA_HAKEMISTO/NIMET_TXT).is_file():
+        app.logger.info("Nimitiedostoa ei ole olemassa.")
+        return []
+    app.logger.info("Haetaan nimet")
+    with open(DATA_HAKEMISTO/NIMET_TXT, "r") as nimi_tiedosto:
+        nimet = [nimi.strip() for nimi in nimi_tiedosto.readlines() if nimi.strip()]
+    return nimet
+
+
 @app.route('/kahvi',  methods=['POST'])
 def home():
     lkm = halukkaat.qsize()
@@ -44,6 +61,9 @@ def home():
     virkista_halukkaat(halukkaat)
     lkm = halukkaat.qsize()
     halukkaats = halukkaatstr(lkm)
+    nimet = hae_nimet()
+    return render_template('index.html', halukkaat=halukkaats, nimet=nimet)
+
 
 @app.route('/favicon.ico')
 def favicon():
