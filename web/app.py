@@ -16,7 +16,7 @@ def virkista_halukkaat(halukkaat: Queue[float]):
     # no peek method this is why q.queue[0] is checked this way.
     app.logger.info("Virkistetään halukkaat")
     while not halukkaat.empty() \
-        and halukkaat.queue[0] - time.time() > 15*60:
+        and time.time() - halukkaat.queue[0] > 15*60:
         halukkaat.get()
 
 
