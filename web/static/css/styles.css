@@ -66,8 +66,8 @@ table {
 
 @media (prefers-color-scheme: light) {
     :root {
-        --main-bg-color: #c9a68d;
-        --main-fg-color: #554737;
+        --main-bg-color: rgb(201, 166, 141);
+        --main-fg-color: rgb(85, 71, 55);
     }
 }
 
@@ -130,8 +130,19 @@ table {
     }
 
     #nimitiedot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 0px 20px;
         margin-bottom: 20px;
+        background-color: rgba(from var(--main-fg-color) r g b / 15%);
+        border-radius: 10px;
+    }
+
+    #seurantaohjelinkki {
+        margin-top: auto;
+        padding: 0.5em;
+        text-align: center;
     }
 
     #nimitiedot * {
@@ -148,6 +159,28 @@ table {
         font-size: 1.5em;
         line-height: 1.4;
     }
+
+    #seurantaohje {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    #seurantaohje > h1 {
+        text-align: center;
+        font-size: 3em;
+        margin: 1em
+    }
+
+    #seurantaohje li {
+        text-align: center;
+        list-style: inside decimal;
+        font-size: 2em;
+        margin: 1em;
+    }
+
 }
 
 @media all and (min-width: 800px) {
