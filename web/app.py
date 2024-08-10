@@ -80,6 +80,11 @@ def tietoa():
     return render_template('tietoa.html')
 
 
+@app.route('/seuranta/ohje')
+def seuranta_ohje():
+    return render_template('seurantaohje.html')
+
+
 def main():
     app.run(host='0.0.0.0', port=5000, debug=True)
 
