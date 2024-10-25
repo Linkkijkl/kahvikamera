@@ -4,7 +4,7 @@ services:
     container_name: kahvikamera
     restart: unless-stopped
     ports:
-      - "5000:${PORT}"
+      - "127.0.0.1:${PORT}:5000"
     volumes:
       - "data:/data"
   
@@ -14,11 +14,13 @@ services:
     environment:
       - PUBLIC_KEY=${SSH_LOGIN_PUBLIC_KEY}
       - USER_NAME=kahvi
+      - PUID=0
+      - PGID=0
     volumes:
       - "data:/data"
       - "openssh-config:/config"
     ports:
-      - "${SSH_PORT}:22"
+      - "${SSH_PORT}:2222"
 
 
 volumes:
