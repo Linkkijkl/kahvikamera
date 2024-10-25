@@ -6,7 +6,7 @@ from typing import Any
 
 def send_image_to_server(imgPath: str):
     try:
-        subprocess.run(['scp', imgPath,'root@kattila.cafe:~/kahvikamera/web/static/images/'], capture_output=True)
+        subprocess.run(['scp', '-P', 5001, '-o', 'StrictHostKeyChecking no', imgPath,'kahvi@linkkijkl.fi:/data/'], capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f'An error occured: {str(e)}')
 
