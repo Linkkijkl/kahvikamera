@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    container_name: kahvikamera
+    restart: unless-stopped
+    ports:
+      - "5000:${PORT}"
+    volumes:
+      - "data:/data"
+  
+  ssh-server:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: openssh-server
+    environment:
+      - PUBLIC_KEY=${SSH_LOGIN_PUBLIC_KEY}
+      - USER_NAME=kahvi
+    volumes:
+      - "data:/data"
+      - "openssh-config:/config"
+    ports:
+      - "${SSH_PORT}:22"
+
+
+volumes:
+  openssh-config:
+  data:

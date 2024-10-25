@@ -2,3 +2,4 @@ nohup.out
 *.jpg
 /myenv
 __pycache__
+.env

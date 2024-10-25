@@ -13,7 +13,7 @@
     }
 
     function updateImage() {
-        const imageUrl = "{{ url_for('static', filename='images/kahvi.jpg') }}";
+        const imageUrl = "/kahvi.jpg";
         const newImageUrl = imageUrl + "?t=" + new Date().getTime();
 
         document.getElementById("kahvikuva").src = newImageUrl;
@@ -34,7 +34,7 @@
     <div class="flexrow">
         <div id="kahvitiedot" class="container">
             <p id="tarkistusaika"></p>
-            <img id="kahvikuva" src="{{ url_for('static', filename='images/kahvi.jpg') }}" alt="Coffee Cam" />
+            <img id="kahvikuva" src="/kahvi.jpg" alt="Coffee Cam" />
             <form method="post" action="/kahvi" id="kahvi-form">
                 <button id="painike" type="submit" value="Haluan kahvia" name="Submit">
                     <span id="kahvinappitxt">Haluan kahvia</span>

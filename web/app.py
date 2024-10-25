@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, send_from_directory
 from pathlib import Path
 import time
 from queue import Queue
@@ -7,8 +7,9 @@ app = Flask(__name__)
 HALUKKAATMAX: int = 10
 halukkaat: Queue[float] = Queue(HALUKKAATMAX)
 
-DATA_HAKEMISTO = Path("data")
+DATA_HAKEMISTO = Path("/data")
 NIMET_TXT = Path("names.txt")
+KAHVIKUVA = Path("kahvi.jpg")
 
 
 def virkista_halukkaat(halukkaat: Queue[float]):
@@ -68,6 +69,11 @@ def index():
     halukkaats = halukkaatstr(lkm)
     nimet = hae_nimet()
     return render_template('index.html', halukkaat=halukkaats, nimet=nimet)
+
+
+@app.route('/kahvi.jpg', methods=['GET'])
+def kuva():
+    return send_from_directory(directory=DATA_HAKEMISTO, path=KAHVIKUVA)
 
 
 @app.route('/favicon.ico')
