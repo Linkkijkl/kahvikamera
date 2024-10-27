@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, send_from_directory
+from flask import Flask, render_template, Response, send_from_directory, redirect, request
 from pathlib import Path
 import time
 from queue import Queue
@@ -10,6 +10,7 @@ halukkaat: Queue[float] = Queue(HALUKKAATMAX)
 DATA_HAKEMISTO = Path("/data")
 NIMET_TXT = Path("names.txt")
 KAHVIKUVA = Path("kahvi.jpg")
+VIESTIT = Path("viestit.txt")
 
 
 def virkista_halukkaat(halukkaat: Queue[float]):
@@ -89,6 +90,22 @@ def tietoa():
 @app.route('/seuranta/ohje')
 def seuranta_ohje():
     return render_template('seurantaohje.html')
+
+@app.route('/viesti')
+def message():
+    viesti = request.args.get('viesti')
+
+    # Palautetaan uusimman viestin sisältö jos syötettä ei ole
+    if not viesti:
+        content = "ei viestiä"
+        with open(DATA_HAKEMISTO/VIESTIT, "r", encoding="utf-8") as old_messages_file:
+            content = old_messages_file.read()
+        return content
+
+    with open(DATA_HAKEMISTO/VIESTIT, "w", encoding="utf-8") as message_file:
+        message_file.write(viesti)
+
+    return redirect("/")
 
 
 def main():
