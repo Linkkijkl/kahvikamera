@@ -100,7 +100,7 @@ def message():
         content = "ei viestiä"
         with open(DATA_HAKEMISTO/VIESTIT, "r", encoding="utf-8") as old_messages_file:
             content = old_messages_file.read()
-        return content
+        return Response(content, mimetype="text/plain")
 
     with open(DATA_HAKEMISTO/VIESTIT, "w", encoding="utf-8") as message_file:
         message_file.write(viesti)
