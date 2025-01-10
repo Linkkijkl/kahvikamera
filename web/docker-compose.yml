@@ -11,6 +11,7 @@ services:
   ssh-server:
     image: lscr.io/linuxserver/openssh-server:latest
     container_name: openssh-server
+    restart: unless-stopped
     environment:
       - PUBLIC_KEY=${SSH_LOGIN_PUBLIC_KEY}
       - USER_NAME=kahvi
