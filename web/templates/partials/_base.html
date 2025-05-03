@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
-    {% block head -%}
+    {%- block head -%}
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <title>{% block title -%} Coffee cam {% endblock -%}</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+        <link rel="dns-prefetch" href="https://kattila-api.linkkijkl.fi/" />
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <link rel="manifest" href="manifest.json" />
         {% block scripts -%}{% endblock -%}
     </head>
     {% endblock -%}
     <body>
-        {% block body required -%}{% endblock -%}
+        {% block body -%} {% endblock -%}
     </body>
 </html>

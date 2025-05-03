@@ -1,0 +1,19 @@
+{% extends 'partials/_base.html' %}
+{% block scripts %}
+<script id="reloads" src="js/reloads.js"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Kattilan kahvikamera</h1>
+    <div class="flexrow">
+        <div id="coffee-info" class="container">
+            <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
+            <button id="coffee-button" onclick="interested()">
+                <span id="coffee-button-text">Haluan kahvia</span>
+            </button>
+            <p id="interested">Fetching...</p>
+        </div>
+    </div>
+    <p><a href="https://github.com/linkkijkl/kahvikamera">repo</a></p>
+</div>
+{% endblock %}
