@@ -1,13 +1,16 @@
-FROM python:3.13-alpine
-RUN pip install gunicorn
+FROM python:3.13-alpine AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY requirements.txt /opt/app/requirements.txt
-WORKDIR /opt/app
-RUN pip install -r requirements.txt
+COPY requirements.txt /requirements.txt
+RUN uv pip install --system --no-cache-dir --upgrade -r requirements.txt
 
-COPY . .
-RUN pip install .
+ADD . /source
+WORKDIR /source
+RUN mkdir public
+RUN python build.py
 
-EXPOSE 5000
+FROM nginx:alpine
+COPY --from=builder /source/public /usr/share/nginx/html
+COPY static/ /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
-CMD ["gunicorn", "--config", "gunicorn_config.py", "app:app"]
