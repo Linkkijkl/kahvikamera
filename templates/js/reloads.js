@@ -25,5 +25,12 @@ function updateInterested() {
     })
 }
 
+function postInterested() {
+    const interestedPostEndpoint = "{{ api_host }}/interested";
+    fetch(interestedPostEndpoint, {
+        method: "POST"
+    });
+}
+
 setInterval(updateCoffeeImage, 10000);
 setInterval(updateInterested, 10000);
