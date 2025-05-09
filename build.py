@@ -1,4 +1,5 @@
 from staticjinja import Site
+from os import system
 
 
 if __name__ == "__main__":
@@ -6,5 +7,5 @@ if __name__ == "__main__":
         "api_host": "https://kattila-api.linkkijkl.fi"
     }
     site = Site.make_site(outpath="public", env_globals=env_globals)
-    # enable automatic reloading
     site.render()
+    system("cp -R static/* public/")
