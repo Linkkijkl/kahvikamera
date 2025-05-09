@@ -1,0 +1,34 @@
+name: Deploy to production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./  
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - run: uv python install
+      - run: uv pip install -r requirements.txt
+      - run: python build.py
+
+      - name: Deploy
+        uses: up9cloud/action-rsync@master
+        env:
+          SOURCE: ./
+          ARGS_MORE: --checksum
+          VERBOSE: true
+          
+          HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          PORT: ${{ secrets.DEPLOY_SSH_PORT }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          KEY: ${{ secrets.SSH_KEY }}
+          TARGET: ${{ secrets.DEPLOY_TARGET }}
