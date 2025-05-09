@@ -30,6 +30,7 @@ function postInterested() {
     fetch(interestedPostEndpoint, {
         method: "POST"
     });
+    updateInterested()
 }
 
 setInterval(updateCoffeeImage, 10000);
