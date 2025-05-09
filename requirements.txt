@@ -1,4 +1,1 @@
-flask
-opencv-python
-opencv-contrib-python
-numpy<2
+staticjinja

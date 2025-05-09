@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: kahvikamera
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: rebuild
+          path: .
+    ports:
+      - "5000:8080"
