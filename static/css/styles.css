@@ -124,7 +124,7 @@ table {
         border-radius: 20px;
         box-shadow: 10px 10px 20px 3px color-mix(in srgb, var(--main-bg-color), black 30%),
                    -10px -10px 20px 3px color-mix(in srgb, var(--main-bg-color), var(--main-fg-color) 5%);
-        max-width: calc(100vw - 16px);
+        max-width: min(calc(100vw - 16px), 800px);
         margin: 8px;
     }
 
