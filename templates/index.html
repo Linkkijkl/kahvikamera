@@ -1,6 +1,6 @@
 {% extends 'partials/_base.html' %}
 {% block scripts %}
-<script id="reloads" src="js/reloads.js"></script>
+<script src="js/main.js"></script>
 {% endblock %}
 {% block body %}
 <div class="container">
@@ -9,7 +9,7 @@
     <div class="flexrow">
         <div id="coffee-info" class="container">
             <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
-            <button id="coffee-button" onclick="postInterested()">
+            <button id="coffee-button">
                 <span id="coffee-button-text">Haluan kahvia</span>
             </button>
             <p id="interested">Halukkaat: haetaan...</p>
