@@ -24,17 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
             interestedMax = interestedMaxResponse;
         });
 
+    document.getElementById('coffee-button').addEventListener('click', () => {
+        const interestedPostEndpoint = '{{ api_host }}/interested';
+        fetch(interestedPostEndpoint, {
+            method: 'POST'
+        });
+        updateInterested();
+    }); 
+    
     const updateInterval = 10_000;
-    setInterval(() => {
+    const update = () => {
         updateImage();
         updateInterested();
-    }, updateInterval);
-});
-
-document.getElementById('coffee-button').addEventListener('click', () => {
-    const interestedPostEndpoint = '{{ api_host }}/interested';
-    fetch(interestedPostEndpoint, {
-        method: 'POST'
-    });
-    updateInterested();
+    };
+    setInterval(() => update(), updateInterval);
+    update();
 });
