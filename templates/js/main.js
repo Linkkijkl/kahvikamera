@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = () => {
         updateImage();
         updateInterested();
+        updateSeuranta();
     };
     setInterval(() => update(), updateInterval);
     update();
