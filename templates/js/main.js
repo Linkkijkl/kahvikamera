@@ -17,26 +17,25 @@ const updateInterested = () => {
 };
 
 const updateSeuranta = () => {
-    const seurantaEndpoint = "{{ api_host }}/seuranta/users";
-    const seurantaContainerElement = document.getElementById("seuranta-list");
+    const seurantaEndpoint = '{{ api_host }}/seuranta/users';
+    const seurantaContainerElement = document.getElementById('seuranta-list');
     fetch(seurantaEndpoint)
-    .then(response => response.json())
-    .then(seurantaJson => {
-        let userElements = new DocumentFragment;
-        for (let userIndex in seurantaJson.users) {
-            userObject = seurantaJson.users[userIndex]
-            let userElement = document.createElement("li");
-            userElement.textContent = userObject.username;
-            for (membershipIndex in userObject.memberships) {
-                userElement.classList.add(userObject.memberships[membershipIndex]);
+        .then(response => response.json())
+        .then(seurantaJson => {
+            const userElements = new DocumentFragment;
+            for (const user of seurantaJson.users) {
+                const userElement = document.createElement('li');
+                userElement.textContent = user.username;
+                for (const membership of user.memberships) {
+                    userElement.classList.add(membership);
+                }
+                for (const boardMembership of user.board_memberships) {
+                    userElement.classList.add(`board-${boardMembership}`);
+                }
+                userElements.append(userElement);
             }
-            for (board_membershipIndex in userObject.board_memberships) {
-                userElement.classList.add(`board-${userObject.board_memberships[board_membershipIndex]}`);
-            }
-            userElements.append(userElement);
-        }
-        seurantaContainerElement.replaceChildren(userElements);
-    })
+            seurantaContainerElement.replaceChildren(userElements);
+        });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -61,6 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateInterested();
         updateSeuranta();
     };
-    setInterval(() => update(), updateInterval);
+    setInterval(update, updateInterval);
     update();
 });
