@@ -1,10 +1,14 @@
 let interestedMax = 0;
+let interval;
+const UPDATE_INTERVAL = 10_000;
+
 
 const updateImage = () => {
     const coffeeImageEndpoint = '{{ api_host }}/coffee/image';
     const newImageUrl = coffeeImageEndpoint + '?t=' + new Date().getTime();
     document.getElementById('coffee-image').src = newImageUrl;
 };
+
 
 const updateInterested = () => {
     const interestedAmountEndpoint = '{{ api_host }}/interested/amount';
@@ -15,6 +19,7 @@ const updateInterested = () => {
             interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
         });
 };
+
 
 const updateSeuranta = () => {
     const seurantaEndpoint = '{{ api_host }}/seuranta/users';
@@ -38,6 +43,18 @@ const updateSeuranta = () => {
         });
 };
 
+
+const startUpdating = () => {
+    const update = () => {
+        updateImage();
+        updateInterested();
+        updateSeuranta();
+    };
+    interval = setInterval(update, UPDATE_INTERVAL);
+    update();
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const interestedMaxEndpoint = '{{ api_host }}/interested/max';
     fetch(interestedMaxEndpoint)
@@ -52,14 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST'
         });
         updateInterested();
-    }); 
-    
-    const updateInterval = 10_000;
-    const update = () => {
-        updateImage();
-        updateInterested();
-        updateSeuranta();
-    };
-    setInterval(update, updateInterval);
-    update();
+    });
+
+    startUpdating();
+});
+
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        clearInterval(interval);
+    } else {
+        startUpdating();
+    }
 });
