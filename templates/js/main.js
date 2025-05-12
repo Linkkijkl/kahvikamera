@@ -31,10 +31,10 @@ const updateSeuranta = () => {
             for (const user of seurantaJson.users) {
                 const userElement = document.createElement('li');
                 userElement.textContent = user.username;
-                for (const membership of user.memberships) {
+                for (const membership of user.memberships ?? []) {
                     userElement.classList.add(membership);
                 }
-                for (const boardMembership of user.board_memberships) {
+                for (const boardMembership of user.board_memberships ?? []) {
                     userElement.classList.add(`board-${boardMembership}`);
                 }
                 userElements.append(userElement);
