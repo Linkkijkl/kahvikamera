@@ -65,10 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('coffee-button').addEventListener('click', () => {
         const interestedPostEndpoint = '{{ api_host }}/interested';
+        const interestedElement = document.getElementById('interested');
         fetch(interestedPostEndpoint, {
             method: 'POST'
+        })
+        .then(response => response.text())
+        .then(interestedAmount => {
+            interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
         });
-        updateInterested();
     });
 
     startUpdating();
