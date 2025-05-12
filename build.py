@@ -1,5 +1,5 @@
 from staticjinja import Site
-from os import system
+import shutil
 
 
 if __name__ == "__main__":
@@ -8,4 +8,4 @@ if __name__ == "__main__":
     }
     site = Site.make_site(outpath="public", env_globals=env_globals)
     site.render()
-    system("cp -R static/* public/")
+    shutil.copytree("static", "public", dirs_exist_ok=True)
