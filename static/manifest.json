@@ -1,3 +1,91 @@
 {
-    "name": "Kattila"
+    "name": "Kattila",
+    "author": "Linkki Website Task Force",
+    "developer": {
+        "name": "Linkki Website Task Force",
+        "url": "https://github.com/Linkkijkl"
+    },
+    "id": "kattila/v1",
+    "version": "1.0.0",
+    "start_url": "https://kattila.linkkijkl.fi",
+    "display": "minimal-ui",
+    "description": "Your digital eye into the lounge quarters of Linkki and Algo",
+    "categories": ["social", "utilities", "lifestyle"],
+    "background_color": "#554737",
+    "theme_color": "#c9a68d",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/kattila_full192px.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purposes": "any"
+        },
+        {
+            "src": "icons/kattila_full_512px.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purposes": "any"
+        },
+        {
+            "src": "icons/kattila_full_monochrome_192px.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purposes": "monochrome"
+        },
+        {
+            "src": "icons/kattila_full_monochrome_512px.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purposes": "monochrome"
+        },
+        {
+            "src": "icons/kattila_full_monochrome.svg",
+            "sizes": "any",
+            "type": "image/svg",
+            "purposes": "monochrome"
+        },
+        {
+            "src": "icons/kattila_full.svg",
+            "sizes": "any",
+            "type": "image/svg",
+            "purposes": "any"
+        },
+        {
+            "src": "icons/kattila_maskable192px.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purposes": "maskable"
+        },
+        {
+            "src": "icons/kattila_maskable_512px.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purposes": "maskable"
+        },
+        {
+            "src": "icons/kattila_maskable_monochrome_192px.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purposes": "maskable monochrome"
+        },
+        {
+            "src": "icons/kattila_maskable_monochrome_512px.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purposes": "maskable monochrome"
+        },
+        {
+            "src": "icons/kattila_maskable_monochrome.svg",
+            "sizes": "any",
+            "type": "image/svg",
+            "purposes": "maskable monochrome"
+        },
+        {
+            "src": "icons/kattila_maskable.svg",
+            "sizes": "any",
+            "type": "image/svg",
+            "purposes": "maskable"
+        }
+    ]
 }
