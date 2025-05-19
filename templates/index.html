@@ -4,16 +4,14 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-    <h1>Kattilan kahvikamera</h1>
+    <h1 class="headline">Kattilan kahvikamera</h1>
     <div class="notice">
         <h2>🐧 väliaikaisesti Dumpin toimistossa <a href="https://navi.jyu.fi/space/m2437515">Ag D124</a> 🐧</h2>
     </div>
     <div class="flexrow">
         <div class="container">
             <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
-            <button id="coffee-button">
-                <span id="coffee-button-text">Haluan kahvia</span>
-            </button>
+            <button id="coffee-button">Haluan kahvia</button>
             <p id="interested">Halukkaat: haetaan...</p>
         </div>
         <div class="container" id="seuranta-container">

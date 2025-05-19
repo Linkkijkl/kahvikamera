@@ -95,6 +95,10 @@ table {
         font-weight: 700;
         font-size: 3em;
         margin: 12px;
+
+        &.headline {
+            font-size: clamp(3rem, 10dvw, 6rem);
+        }
     }
 
     h2 {
@@ -106,12 +110,17 @@ table {
     }
 
     .notice {
-        background-color: yellow;
+        --bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
+        background-color: rgb(255, 255, 0);
+        background: var(--bottom-glow),	linear-gradient(to bottom, rgb(217, 159, 0), rgb(255, 255, 0));
         border-radius: 20px;
-        border: 4px solid darkgoldenrod;
-        padding: 20px;
-        margin: 8px;
+        border: 4px solid grey;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        padding: min(0.5rem, 2%);
+        margin: 8px 0px;
+        max-width: min(calc(100vw - 8px), 1000px);
         h2 {
+            font-size: clamp(1.5rem, 3dvw, 2rem);
             color: black;
         }
     }
@@ -129,7 +138,7 @@ table {
         #seuranta-list {
             li {
                 font-size: 1.5em;
-                line-height: 1.4;    
+                line-height: 1.4;
                 text-align: center;
                 list-style: "\2615  " inside;
             }
@@ -138,23 +147,45 @@ table {
 
     #coffee-image {
         border-radius: 20px;
-        box-shadow: 10px 10px 20px 3px color-mix(in srgb, var(--main-bg-color), black 30%),
-                   -10px -10px 20px 3px color-mix(in srgb, var(--main-bg-color), var(--main-fg-color) 5%);
-        max-width: min(calc(100vw - 16px), 800px);
-    }
-
-    #coffee-button-text {
-        font-family: 'Platypi', 'Noto Serif Regular', 'Arial', monospace;;
+        border: 4px solid grey;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        max-width: min(calc(100vw - 16px), 1000px);
     }
 
     #coffee-button {
-        color: var(--main-fg-color);
-        background-color: var(--main-bg-color);
-        border: outset 4px var(--main-fg-color);
-        font-size: 1.5em;
-        padding: 0.2em 0.4em 0.4em;
+        --bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
+        --hue: 32;
+        --button-background: oklch(75% 0.1 var(--hue) / 0.8);
+        --bg-dark: oklch(35% 0.1 var(--hue) / 0.75);
+        --button-foreground: oklch(15% 0.05 var(--hue));
+        background-color: var(--button-background);
+        background: var(--bottom-glow),	linear-gradient(to bottom, var(--bg-dark), var(--button-background));
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        border: 4px solid grey;
         border-radius: 10px;
-        margin: 8px;
+        cursor: pointer;
+        margin: 1em 1ex;
+        padding: 1ex 1em;
+        position: relative;
+        text-shadow: 0 2px .5em #0003;
+        transition: all 300ms;
+
+        color: #342b22;
+        font-family: "Platypi", sans-serif;
+        font-weight: 700;
+        font-size: 1.5em;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: calc(100% - 4px);
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+            border-radius: 4px;
+            transition: background 400ms;
+        }
     }
 
     a:visited {
