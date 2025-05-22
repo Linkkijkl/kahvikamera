@@ -123,6 +123,9 @@ table {
             font-size: clamp(1.5rem, 3dvw, 2rem);
             color: black;
         }
+        p {
+            color: black;
+        }
     }
 
     #seuranta-container {
