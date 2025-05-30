@@ -1,6 +1,8 @@
 name: Deploy to production
 on:
   push:
+    paths-ignore:
+      - README.md
     branches:
       - main
 jobs:
@@ -9,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./  
+        working-directory: ./
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -27,7 +29,7 @@ jobs:
           SOURCE: ./public/
           ARGS_MORE: --checksum
           VERBOSE: true
-          
+
           HOST: ${{ secrets.DEPLOY_SSH_HOST }}
           PORT: ${{ secrets.DEPLOY_SSH_PORT }}
           USER: ${{ secrets.DEPLOY_USER }}
