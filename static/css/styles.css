@@ -53,21 +53,18 @@ table {
 }
 
 :root {
-    --main-fg-color: #554737;
-    --main-bg-color: #c9a68d;
-}
+    color-scheme: light dark;
+    --main-bg-color: light-dark(#c9a68d, #3c3227);
+    --main-fg-color: light-dark(#554737, #c9a68d);
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --main-bg-color: #3c3227;
-        --main-fg-color: #c9a68d;
+    &:has(input[name="color-scheme"][value="light dark"]:checked) * {
+        color-scheme: light dark;
     }
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --main-bg-color: rgb(201, 166, 141);
-        --main-fg-color: rgb(85, 71, 55);
+    &:has(input[name="color-scheme"][value="light"]:checked) * {
+        color-scheme: light;
+    }
+    &:has(input[name="color-scheme"][value="dark"]:checked) * {
+        color-scheme: dark;
     }
 }
 
