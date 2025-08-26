@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.text())
         .then(interestedMaxResponse => {
             interestedMax = interestedMaxResponse;
+            updateInterested();
         });
 
     document.getElementById('coffee-button').addEventListener('click', () => {
