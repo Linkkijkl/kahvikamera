@@ -108,8 +108,8 @@ table {
 
     .notice {
         --bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
-        background-color: rgb(160, 255, 160);
-        background: var(--bottom-glow),	linear-gradient(to bottom, rgb(160, 255, 160), rgb(200, 255, 200));
+        background-color: var(--main-fg-color);
+        background: var(--bottom-glow),	linear-gradient(to bottom, #c9a68d, #e4c8b4);
         border-radius: 20px;
         border: 4px solid grey;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
