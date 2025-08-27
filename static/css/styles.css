@@ -202,6 +202,14 @@ table {
         text-decoration-color: color-mix(in srgb, var(--main-fg-color), rgb(155, 69, 155) 50%);
     }
 
+    a[href^="http"]::after {
+        content: "⮵";
+        display: inline-block;
+        width: 0.8em;
+        height: 0.8em;
+        margin-left: 0.25em;
+    }
+
 }
 
 @media all and (min-width: 800px) {
