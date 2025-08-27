@@ -143,6 +143,15 @@ table {
                 list-style: "\2615  " inside;
             }
         }
+
+        #seuranta-join {
+            color: light-dark(rgb(0, 255, 255), rgb(34, 0, 255));
+            position: absolute;
+            bottom: 2em;
+            &:visited {
+                color: light-dark(rgb(255, 128, 192), rgb(169, 34, 163));
+            }
+        }
     }
 
     #coffee-image {
