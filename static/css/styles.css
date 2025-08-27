@@ -134,6 +134,8 @@ table {
         color: var(--main-bg-color);
         background-color: var(--main-fg-color);
         border-radius: 20px;
+        border: 4px solid grey;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 
         #seuranta-list {
             li {
