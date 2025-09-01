@@ -6,6 +6,12 @@ services:
     develop:
       watch:
         - action: rebuild
-          path: .
+          path: build.py
+        - action: rebuild
+          path: static
+        - action: rebuild
+          path: templates
+        - action: rebuild
+          path: requirements.txt
     ports:
       - "5000:8080"
