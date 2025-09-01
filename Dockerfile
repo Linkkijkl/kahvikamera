@@ -1,4 +1,7 @@
 FROM python:3.13-alpine AS builder
+ENV TZ="Europe/Helsinki"
+ENV LC_ALL="fi_FI.UTF-8"
+ENV LANG="fi_FI.UTF-8"
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY requirements.txt /requirements.txt
