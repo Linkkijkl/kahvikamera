@@ -2,26 +2,22 @@
 {% block scripts %}
 <script src="js/main.js"></script>
 {% endblock %}
-{% block body %}
-{% include 'partials/_header.html' %}
-<div class="container">
-    <h1 class="headline">Kattilan kahvikamera</h1>
-    <div class="notice">
-        <h2>Kattila on viimein muuttanut!</h2>
-        <p>Löydät Kattilan mikroluokkasiivestä, AgB102.</p>
+{% block body_contents %}
+<h1 class="headline">Kattilan kahvikamera</h1>
+<div class="notice">
+    <h2>Kattila on viimein muuttanut!</h2>
+    <p>Löydät Kattilan mikroluokkasiivestä, AgB102.</p>
+</div>
+<div class="flexrow">
+    <div class="container">
+        <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
+        <button id="coffee-button">Haluan kahvia</button>
+        <p id="interested">Halukkaat: haetaan...</p>
     </div>
-    <div class="flexrow">
-        <div class="container">
-            <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
-            <button id="coffee-button">Haluan kahvia</button>
-            <p id="interested">Halukkaat: haetaan...</p>
-        </div>
-        <div class="container" id="seuranta-container">
-            <h2>Kattilassa paikalla:</h2>
-            <ul id="seuranta-list"></ul>
-            <a id="seuranta-join" href="/seurantaohje.html">liity seurantaan</a>
-        </div>
+    <div class="container" id="seuranta-container">
+        <h2>Kattilassa paikalla:</h2>
+        <ul id="seuranta-list"></ul>
+        <a id="seuranta-join" href="/seurantaohje.html">liity seurantaan</a>
     </div>
-    <p><a href="https://github.com/linkkijkl/kahvikamera">repo</a></p>
 </div>
 {% endblock %}
