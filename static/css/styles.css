@@ -234,7 +234,7 @@ table {
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
-        gap: 16px;
+        gap: 8px;
 
         >:first-child {
             margin-top: 16px;
@@ -258,6 +258,10 @@ table {
             dt {
                 font-size: 1.25rem;
             }
+        }
+
+        div {
+            margin: 16px;
         }
 
     }
