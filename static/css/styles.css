@@ -85,6 +85,13 @@ table {
         text-align: center;
     }
 
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
     h1 {
         color: inherit;
         text-align: center;
@@ -108,13 +115,13 @@ table {
     .notice {
         --bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
         background-color: var(--main-fg-color);
-        background: var(--bottom-glow),	linear-gradient(to bottom, #c9a68d, #e4c8b4);
+        background: var(--bottom-glow), linear-gradient(to bottom, #c9a68d, #e4c8b4);
         border-radius: 20px;
         border: 4px solid grey;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-        padding: min(0.5rem, 2%);
+        padding: 8px;
         margin: 8px 0px;
-        max-width: min(calc(100vw - 8px), 1000px);
+        max-width: min(calc(100vw - 32px), 1000px);
         h2 {
             font-size: clamp(1.5rem, 3dvw, 2rem);
             color: black;
@@ -221,17 +228,50 @@ table {
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
+        gap: 16px;
+
+        >:first-child {
+            margin-top: 16px;
+        }
+
+        >:last-child {
+            margin-bottom: 8px;
+        }
         
         #build-time {
             display: block;
+            font-size: 1rem;
         }
+
+        dl {
+            text-align: left;
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            line-height: 1.5rem;
+            dt {
+                font-size: 1.25rem;
+            }
+        }
+
+    }
+
+    .flexcontainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    :has(+ footer) {
+        margin-bottom: 5em;
     }
 
 }
 
 @media all and (min-width: 800px) {
-    .flexrow {
+    .flexcontainer {
         display: flex;
         flex-direction: row;
+        gap: 1em;
     }
 }
