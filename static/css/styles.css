@@ -74,6 +74,11 @@ table {
         font-family: 'Platypi', 'Noto Serif Regular', 'Arial', system-ui;
     }
 
+    html, body { /* Essential for footer placement */
+        width: 100%;
+        min-height: 100dvh;
+    }
+
     body {
         color: var(--main-fg-color);
         background-color: var(--main-bg-color);
@@ -223,6 +228,7 @@ table {
         background-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
         overflow: hidden;
         margin-top: auto;
+        border-top: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color));
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
