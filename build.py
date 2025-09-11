@@ -6,7 +6,8 @@ import time
 if __name__ == "__main__":
     env_globals = {
         "api_host": "https://kattila-api.linkkijkl.fi",
-        "build_time": time.ctime()
+        "build_timestr": time.ctime(),
+        "build_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
     }
     site = Site.make_site(outpath="public", env_globals=env_globals)
     site.render()
