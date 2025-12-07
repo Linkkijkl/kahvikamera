@@ -111,16 +111,49 @@ table {
         text-align: center;
     }
 
+    header {
+        background-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
+        border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color));
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        width: 100%;
+
+        h1.display {
+            font-size: 3em;
+        }
+
+        a {
+            color: var(--main-fg-color);
+            text-decoration: none;
+            height: 3em;
+        }
+
+        img {
+            height: 3em;
+            width: auto;
+        }
+
+        .titlebox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 0.5em;
+        }
+
+        + * {
+            margin-top: 3em;
+        }
+    }
+
     h1 {
         color: inherit;
         text-align: center;
         font-weight: 700;
         font-size: 3em;
-        margin: 12px;
-
-        &.headline {
-            font-size: clamp(3rem, 10dvw, 6rem);
-        }
     }
 
     h2 {
@@ -128,7 +161,6 @@ table {
         text-align: center;
         font-weight: 500;
         font-size: 2em;
-        margin: 8px;
     }
 
     .notice {
@@ -274,10 +306,17 @@ table {
 
     }
 
-    .flexcontainer {
+    .content {
         display: flex;
         flex-direction: column;
         gap: 1em;
+    }
+
+    .flexrow {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
 
     :has(+ footer) {
@@ -292,4 +331,26 @@ table {
         flex-direction: row;
         gap: 1em;
     }
+}
+
+@media (width <= 720px) {
+
+    header {
+        + * {
+            margin-top: 1em;
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        h1.display {
+            font-size: 2em;
+        }
+    }
+
+    :has(+ footer) {
+        margin-bottom: 2em;
+    }
+    
 }

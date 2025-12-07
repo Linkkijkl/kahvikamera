@@ -15,7 +15,7 @@
     {% endblock -%}
     <body>
         {% include 'partials/_header.html' %}
-        {% block body_contents -%} {% endblock -%}
+        <div class="content">{% block body_contents -%} {% endblock -%}</div>
         {% include 'partials/_footer.html' %}
     </body>
 </html>
