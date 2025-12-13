@@ -114,6 +114,8 @@ table {
     header {
         background-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
         border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color));
+        box-sizing: border-box;
+        padding: 1em;
         overflow: hidden;
         display: flex;
         flex-direction: row;
@@ -336,17 +338,23 @@ table {
 @media (width <= 720px) {
 
     header {
-        + * {
-            margin-top: 1em;
-        }
-
+        padding: 0.5em 1em;
         display: flex;
         flex-direction: column;
         gap: 1em;
 
+        .titlebox {
+            column-gap: 1em;
+        }
+
         h1.display {
             font-size: 2em;
+            text-align: left;
         }
+    }
+
+    .content {
+        margin-top: 1em;
     }
 
     :has(+ footer) {
