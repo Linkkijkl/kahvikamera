@@ -55,7 +55,7 @@ table {
 :root {
     color-scheme: light dark;
     --main-bg-color: light-dark(#c9a68d, #3c3227);
-    --main-fg-color: light-dark(#554737, #c9a68d);
+    --main-fg-color: light-dark(#3c3227, #c9a68d);
     --text-color: black;
     --text-shadow-color: #0003;
     --border-color: grey;
@@ -115,6 +115,7 @@ table {
     header {
         background-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
         border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color));
+        box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
         padding: 1em;
         overflow: hidden;
