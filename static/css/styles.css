@@ -105,6 +105,7 @@ table {
     }
 
     .container {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,12 +143,19 @@ table {
         .titlebox {
             display: flex;
             flex-direction: row;
+            flex-wrap: nowrap;
             justify-content: space-between;
             gap: 0.5em;
         }
 
         + * {
             margin-top: 3em;
+        }
+    }
+
+    #theme-selection {
+        label {
+            text-wrap-mode: nowrap;
         }
     }
 
@@ -189,7 +197,7 @@ table {
             display: none;
         }
 
-        padding: 0.5em;
+        padding: 0.5em 1em;
         color: var(--main-bg-color);
         background-color: var(--main-fg-color);
         border-radius: 20px;
@@ -216,10 +224,11 @@ table {
     }
 
     #coffee-image {
+        box-sizing: border-box;
         border-radius: 20px;
         border: 4px solid var(--border-color);
         box-shadow: 0 4px 4px var(--box-shadow-color);
-        max-width: min(calc(100vw - 16px), 1000px);
+        max-width: min(100dvw, 1000px);
     }
 
     #coffee-button {
@@ -318,6 +327,8 @@ table {
     .flexrow {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5em;
         justify-content: center;
         align-items: center;
     }
