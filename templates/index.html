@@ -3,14 +3,17 @@
 <script src="js/main.js"></script>
 {% endblock %}
 {% block body_contents %}
-<div class="container">
-    <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
-    <button id="coffee-button">Haluan kahvia</button>
-    <p id="interested">Halukkaat: haetaan...</p>
+<div class="flexrow">
+    <div class="container">
+        <img id="coffee-image" src="{{ api_host }}/coffee/image" alt="Kattila's coffee machines" />
+        <button id="coffee-button">Haluan kahvia</button>
+        <p id="interested">Halukkaat: haetaan...</p>
+    </div>
+    <div class="container" id="seuranta-container">
+        <h2>Kattilassa paikalla:</h2>
+        <ul id="seuranta-list"></ul>
+        <a id="seuranta-join" href="/seurantaohje.html">liity seurantaan</a>
+    </div>
 </div>
-<div class="container" id="seuranta-container">
-    <h2>Kattilassa paikalla:</h2>
-    <ul id="seuranta-list"></ul>
-    <a id="seuranta-join" href="/seurantaohje.html">liity seurantaan</a>
-</div>
+
 {% endblock %}

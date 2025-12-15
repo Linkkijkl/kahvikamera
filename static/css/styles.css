@@ -189,6 +189,7 @@ table {
             display: none;
         }
 
+        padding: 0.5em;
         color: var(--main-bg-color);
         background-color: var(--main-fg-color);
         border-radius: 20px;
@@ -328,7 +329,7 @@ table {
 }
 
 @media all and (min-width: 800px) {
-    .flexcontainer {
+    .flexrow {
         display: flex;
         flex-direction: row;
         gap: 1em;
