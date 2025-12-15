@@ -4,9 +4,12 @@ const UPDATE_INTERVAL = 10_000;
 
 
 const updateImage = () => {
+    const timestamp = new Date().getTime()
+    const coffeeImageElement = document.getElementById('coffee-image');
     const coffeeImageEndpoint = '{{ api_host }}/coffee/image';
-    const newImageUrl = coffeeImageEndpoint + '?t=' + new Date().getTime();
-    document.getElementById('coffee-image').src = newImageUrl;
+    const newImageUrl = coffeeImageEndpoint + '?t=' + timestamp;
+    coffeeImageElement.src = newImageUrl;
+    coffeeImageElement.setAttribute("data-timestamp", timestamp);
 };
 
 
