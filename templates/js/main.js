@@ -34,12 +34,8 @@ const updateSeuranta = () => {
             for (const user of seurantaJson.users) {
                 const userElement = document.createElement('li');
                 userElement.textContent = user.username;
-                for (const membership of user.memberships ?? []) {
-                    userElement.classList.add(membership);
-                }
-                for (const boardMembership of user.board_memberships ?? []) {
-                    userElement.classList.add(`board-${boardMembership}`);
-                }
+                user.memberships ??= []
+                userElement.dataset.memberships = user.memberships.join(" ");
                 userElements.append(userElement);
             }
             seurantaContainerElement.replaceChildren(userElements);
