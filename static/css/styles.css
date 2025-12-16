@@ -54,22 +54,24 @@ table {
 
 :root {
     color-scheme: light dark;
-    --main-bg-color: light-dark(#c9a68d, #3c3227);
-    --main-fg-color: light-dark(#3c3227, #c9a68d);
-    --text-color: black;
-    --text-shadow-color: #0003;
-    --border-color: grey;
+    --primary-light-brown: rgb(255, 193, 160);
+    --primary-dark-brown: rgb(55, 39, 27);
+    --main-bg-color: light-dark(var(--primary-light-brown), var(--primary-dark-brown));
+    --main-fg-color: light-dark(var(--primary-dark-brown), var(--primary-light-brown));
+    --header-bg-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
+    --border-color: #808080ff;
     --box-shadow-color: rgba(0, 0, 0, 0.4);
-    --linear-gradient-bg: linear-gradient(to bottom, #c9a68d, #e4c8b4);
-    --bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
     --a-visited-color: color-mix(in srgb, var(--main-fg-color), rgb(155, 69, 155) 50%);
     --a-visited-text-decoration-color: color-mix(in srgb, var(--main-fg-color), rgb(155, 69, 155) 50%);
     --seuranta-join-color: light-dark(rgb(0, 255, 255), rgb(34, 0, 255));
     --seuranta-join-visited-color: light-dark(rgb(255, 128, 192), rgb(169, 34, 163));
+
     --coffee-button-background: oklch(75% 0.1 var(--coffee-button-hue) / 0.8);
     --coffee-button-bg-dark: oklch(35% 0.1 var(--coffee-button-hue) / 0.75);
     --coffee-button-bg-after: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
     --coffee-button-hue: 32;
+    --coffee-button-text-shadow-color: #0003;
+    --coffee-button-bottom-glow: radial-gradient(farthest-corner at bottom center, rgba(255, 255, 255, 0.3), transparent);
 
     &:has(input[name="color-scheme"][value="light dark"]:checked) * {
         color-scheme: light dark;
@@ -109,7 +111,6 @@ table {
     }
 
     .container {
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -117,10 +118,11 @@ table {
     }
 
     header {
-        background-color: color-mix(in srgb, var(--main-bg-color) 90%, var(--main-fg-color));
+        background: linear-gradient(to bottom, lch(from var(--header-bg-color) calc(l + 8) c calc(h - 10)) 50%,
+            lch(from var(--header-bg-color) l c calc(h - 10)) 50%,
+            lch(from var(--header-bg-color) calc(l + 8) c calc(h - 10)));
         border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color));
         box-shadow: 0 0 0.5em 0.5em rgba(0, 0, 0, 0.2);
-        box-sizing: border-box;
         padding: 1em;
         overflow: hidden;
         display: flex;
@@ -132,6 +134,7 @@ table {
 
         h1.display {
             font-size: 3em;
+            text-align: left;
         }
 
         a {
@@ -151,10 +154,6 @@ table {
             flex-wrap: nowrap;
             justify-content: space-between;
             gap: 0.5em;
-        }
-
-        + * {
-            margin-top: 3em;
         }
     }
 
@@ -176,24 +175,6 @@ table {
         text-align: center;
         font-weight: 500;
         font-size: 2em;
-    }
-
-    .notice {
-        background-color: var(--main-fg-color);
-        background: var(--bottom-glow), var(--linear-gradient-bg);
-        border-radius: 20px;
-        border: 4px solid var(--border-color);
-        box-shadow: 0 4px 4px var(--box-shadow-color);
-        padding: 8px;
-        margin: 8px 0px;
-        max-width: min(calc(100vw - 32px), 1000px);
-        h2 {
-            font-size: clamp(1.5rem, 3dvw, 2rem);
-            color: var(--text-color);
-        }
-        p {
-            color: var(--text-color);
-        }
     }
 
     #seuranta-container {
@@ -229,7 +210,6 @@ table {
     }
 
     #coffee-image {
-        box-sizing: border-box;
         border-radius: 20px;
         border: 4px solid var(--border-color);
         box-shadow: 0 4px 4px var(--box-shadow-color);
@@ -238,7 +218,7 @@ table {
 
     #coffee-button {
         background-color: var(--coffee-button-background);
-        background: var(--bottom-glow),	linear-gradient(to bottom, var(--coffee-button-bg-dark), var(--coffee-button-background));
+        background: var(--coffee-button-bottom-glow), linear-gradient(to bottom, var(--coffee-button-bg-dark), var(--coffee-button-background));
         box-shadow: 0 4px 4px var(--box-shadow-color);
         border: 4px solid var(--border-color);
         border-radius: 10px;
@@ -246,7 +226,7 @@ table {
         margin: 1em 1ex;
         padding: 1ex 1em;
         position: relative;
-        text-shadow: 0 2px .5em var(--text-shadow-color);
+        text-shadow: 0 2px .5em var(--coffee-button-text-shadow-color);
         transition: all 300ms;
 
         color: #342b22;
@@ -272,6 +252,7 @@ table {
         text-decoration-color: var(--a-visited-text-decoration-color);
     }
 
+    /* External links style */
     a[href^="http"]::after {
         content: "🔗";
         display: inline-block;
@@ -291,15 +272,8 @@ table {
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
-        gap: 8px;
-
-        >:first-child {
-            margin-top: 16px;
-        }
-
-        >:last-child {
-            margin-bottom: 8px;
-        }
+        gap: 1em;
+        padding: 0.5em;
         
         #build-time {
             display: block;
@@ -308,9 +282,12 @@ table {
 
         dl {
             text-align: left;
+            justify-content: center;
             display: flex;
             flex-direction: row;
-            gap: 80px;
+            flex-wrap: wrap;
+            column-gap: 5em;
+            row-gap: 1em;
             line-height: 1.5rem;
             dt {
                 font-size: 1.25rem;
@@ -327,6 +304,7 @@ table {
         display: flex;
         flex-direction: column;
         gap: 1em;
+        padding: 2em 0.5em;
     }
 
     .flexrow {
@@ -336,10 +314,6 @@ table {
         gap: 0.5em;
         justify-content: center;
         align-items: center;
-    }
-
-    :has(+ footer) {
-        margin-bottom: 5em;
     }
 
 }
@@ -366,16 +340,10 @@ table {
 
         h1.display {
             font-size: 2em;
-            text-align: left;
         }
     }
 
     .content {
-        margin-top: 1em;
+        padding: 1em 0.25em;
     }
-
-    :has(+ footer) {
-        margin-bottom: 2em;
-    }
-    
 }
