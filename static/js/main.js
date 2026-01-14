@@ -6,7 +6,7 @@ const UPDATE_INTERVAL = 10_000;
 const updateImage = () => {
     const timestamp = new Date().getTime()
     const coffeeImageElement = document.getElementById('coffee-image');
-    const coffeeImageEndpoint = '{{ api_host }}/coffee/image';
+    const coffeeImageEndpoint = 'https://kattila-api.linkkijkl.fi/coffee/image';
     const newImageUrl = coffeeImageEndpoint + '?t=' + timestamp;
     coffeeImageElement.src = newImageUrl;
     coffeeImageElement.setAttribute("data-timestamp", timestamp);
@@ -14,7 +14,7 @@ const updateImage = () => {
 
 
 const updateInterested = () => {
-    const interestedAmountEndpoint = '{{ api_host }}/interested/amount';
+    const interestedAmountEndpoint = 'https://kattila-api.linkkijkl.fi/interested/amount';
     const interestedElement = document.getElementById('interested');
     fetch(interestedAmountEndpoint)
         .then(response => response.text())
@@ -25,7 +25,7 @@ const updateInterested = () => {
 
 
 const updateSeuranta = () => {
-    const seurantaEndpoint = '{{ api_host }}/seuranta/users';
+    const seurantaEndpoint = 'https://kattila-api.linkkijkl.fi/seuranta/users';
     const seurantaContainerElement = document.getElementById('seuranta-list');
     fetch(seurantaEndpoint)
         .then(response => response.json())
@@ -55,7 +55,7 @@ const startUpdating = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const interestedMaxEndpoint = '{{ api_host }}/interested/max';
+    const interestedMaxEndpoint = 'https://kattila-api.linkkijkl.fi/interested/max';
     fetch(interestedMaxEndpoint)
         .then(response => response.text())
         .then(interestedMaxResponse => {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     document.getElementById('coffee-button').addEventListener('click', () => {
-        const interestedPostEndpoint = '{{ api_host }}/interested';
+        const interestedPostEndpoint = 'https://kattila-api.linkkijkl.fi/interested';
         const interestedElement = document.getElementById('interested');
         fetch(interestedPostEndpoint, {
             method: 'POST'
