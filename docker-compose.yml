@@ -1,17 +1,7 @@
 services:
-  app:
-    build: .
-    container_name: kahvikamera
-    restart: unless-stopped
-    develop:
-      watch:
-        - action: rebuild
-          path: build.py
-        - action: rebuild
-          path: static
-        - action: rebuild
-          path: templates
-        - action: rebuild
-          path: requirements.txt
+  kahvikamera-static:
+    image: ghcr.io/getzola/zola:latest
+    command: serve
+    volume: .:/project
     ports:
-      - "5000:8080"
+      - "1111:1111"
