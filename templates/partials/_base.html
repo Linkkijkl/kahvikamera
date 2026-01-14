@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fi">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ lang }}">
     {%- block head -%}
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>{% block title -%}Kattila{% endblock -%}</title>
+        <title>{% block title -%}Kattila{% endblock title -%}</title>
         <link rel="dns-prefetch" href="https://kattila-api.linkkijkl.fi/" />
         <link rel="icon" type="image/svg" href="/icons/kattila_full.svg">
         <meta name="color-scheme" content="light dark" >
@@ -15,7 +15,7 @@
     {% endblock -%}
     <body>
         {% include 'partials/_header.html' %}
-        <div class="content">{% block body_contents -%} {% endblock -%}</div>
+        <div class="content">{% block body_contents -%}{% endblock body_contents -%}</div>
         {% include 'partials/_footer.html' %}
     </body>
 </html>
