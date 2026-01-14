@@ -16,12 +16,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - run: uv venv
-      - run: uv python install
-      - run: uv pip install -r requirements.txt
-      - run: uv run build.py
+      - name: Generate static site
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola
+      - run: zola build
 
       - name: Deploy
         uses: up9cloud/action-rsync@master
