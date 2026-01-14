@@ -10,14 +10,17 @@ To-do list:
 
 ## Development
 
-To start a local dev environment run the following:
+This project uses the static site generator Zola. It is generally packaged for most operating systems, but the easiest environment setup will be with docker compose.
 
-```sh
-docker compose up --watch --build
-```
+### Local tools
 
-When you are done you may run the following:
+- [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
-```sh
-docker compose down --remove-orphans
-```
+`zola serve`
+Go to [zola docs](https://www.getzola.org/documentation/getting-started/cli-usage/#serve) if this does not work.
+
+### Docker compose
+
+`docker compose up`
+
+When you are done `docker compose down`
