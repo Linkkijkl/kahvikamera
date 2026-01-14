@@ -1,4 +1,4 @@
 {% extends 'partials/_base.html' %}
 {% block body_contents %}
-{{ page.content }}
+{{ page.content | safe }}
 {% endblock body_contents %}
