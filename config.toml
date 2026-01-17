@@ -1,6 +1,8 @@
 # The URL the site will be built for
 base_url = "https://kattila.linkkijkl.fi"
 
+default_language = "fi"
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
@@ -15,5 +17,13 @@ highlight_code = false
 [languages.fi]
 title = "Kahvikamera"
 
+[languages.fi.translations]
+phone_app = "Puhelinsovellus"
+site_features = "Sivun ominaisuudet"
+
 [languages.en]
 title = "Coffee Camera"
+
+[languages.en.translations]
+phone_app  = "Phone app"
+site_features = "Site features"
