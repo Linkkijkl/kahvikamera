@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ lang }}">
+    <head>
+        {%- block head -%}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{% block title -%}Kattila{% endblock title -%}</title>
+        <link rel="dns-prefetch" href="https://kattila-api.linkkijkl.fi/" />
+        <link rel="icon" type="image/svg" href="/icons/kattila_full.svg">
+        <meta name="color-scheme" content="light dark" >
+        <link rel="stylesheet" type="text/css" href="{{ get_url(path="/style.css") }}" />
+        <link rel="manifest" href="manifest.json" />
+        {%- endblock head -%}
+    </head>
+    <body>
+        {%- include 'partials/_header.html' -%}
+        <div class="content">{% block content -%}{% endblock content -%}</div>
+        <footer>
+            {% block footer %}
+            <dl>
+                <div>
+                    <dt>{{ trans(key="site_features", lang=lang) }}</dt>
+                    <dd>
+                        <ul>
+                            <li><a href="/seuranta">seuranta</a></li>
+                            <li><a href="{{ get_url(path="@/pwa.md") }}">{{ trans(key="phone_app", lang=lang) }}</a></li>
+                            <li><a href="https://kattila-api.linkkijkl.fi/docs">API</a></li>
+                        </ul>
+                    </dd>
+                </div>
+                <div>
+                    <dt>Sivustosta muualla</dt>
+                    <dd>
+                        <ul>
+                            <li><a href="https://github.com/linkkijkl/kahvikamera">repo</a></li>
+                            <li><a href="https://wiki.linkkijkl.fi/index.php?title=Kahvikamera&oldid=143">historia</a></li>
+                        </ul>
+                    </dd>
+                </div>
+            </dl>
+            {% endblock footer %}
+        </footer>
+    </body>
+</html>
