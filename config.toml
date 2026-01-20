@@ -18,6 +18,7 @@ highlight_code = false
 title = "Kahvikamera"
 
 [languages.fi.translations]
+header_title = "Kattilan kahvikamera"
 phone_app = "Puhelinsovellus"
 site_features = "Sivun ominaisuudet"
 
@@ -25,5 +26,6 @@ site_features = "Sivun ominaisuudet"
 title = "Coffee Camera"
 
 [languages.en.translations]
+header_title = "Kattila coffeecam"
 phone_app  = "Phone app"
 site_features = "Site features"
