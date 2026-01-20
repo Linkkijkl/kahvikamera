@@ -1,0 +1,12 @@
+// theme selection
+:root
+  color-scheme: light dark
+
+  &:has(input[name="color-scheme"][value="light dark"]:checked) *
+    color-scheme: light dark
+  
+  &:has(input[name="color-scheme"][value="light"]:checked) *
+    color-scheme: light
+  
+  &:has(input[name="color-scheme"][value="dark"]:checked) *
+    color-scheme: dark
