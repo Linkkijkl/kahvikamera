@@ -10,9 +10,6 @@ compile_sass = true
 build_search_index = false
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlighting = false
 
 [languages.fi.translations]
 dark = "Tumma"
