@@ -22,7 +22,7 @@ const updateInterested = () => {
             if (document.documentElement.lang === "en") {
                 interestedElement.textContent = `Interested: ${interestedAmount}/${interestedMax}`;
             } else {
-                interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
+            interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
             }
         });
 };
@@ -75,7 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => response.text())
         .then(interestedAmount => {
-            interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
+            if (document.documentElement.lang === "en") {
+                interestedElement.textContent = `Interested: ${interestedAmount}/${interestedMax}`;
+            } else {
+                interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
+            }
         });
     });
 
