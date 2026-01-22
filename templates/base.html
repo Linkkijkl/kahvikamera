@@ -15,11 +15,17 @@
     <body>
         <header>
             <div class="flexrow titlebox"><a href="{{ get_url(path="@/_index.md", lang=lang) }}"><img src="/icons/kattila_full.svg"></a><h1 class="display">{{ trans(key="header_title", lang=lang) }}</h1></div>
-            <div id="theme-selection">
-                <label><input name="color-scheme" type="radio" value="light dark" checked="">Järjestelmä</label>
-                <label><input name="color-scheme" type="radio" value="light">Vaalea</label>
-                <label><input name="color-scheme" type="radio" value="dark">Tumma</label>
-            </div>
+            <menu id="lang-selection">
+                {%- if page.translations -%}
+                    {%- for translation in page.translations -%}
+                    <a href="{{ translation.permalink }}"{% if translation.lang == lang %} class="lang-selected"{% endif %}>{{ translation.lang }}</a>
+                    {%- endfor -%}
+                {%- elif section.translations -%}
+                    {%- for translation in section.translations -%}
+                    <a href="{{ translation.permalink }}"{% if translation.lang == lang %} class="lang-selected"{% endif %}>{{ translation.lang }}</a>
+                    {%- endfor -%}
+                {%- endif -%}
+            </menu>
         </header>
         <div class="content">{% block content -%}{% endblock content -%}</div>
         <footer>
