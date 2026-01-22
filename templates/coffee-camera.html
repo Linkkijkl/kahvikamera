@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% block head %}
 {{ super() }}
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 {% endblock head %}
 {% block content %}
 <div class="flexrow">
     <div class="container">
         <img id="coffee-image" src="https://kattila-api.linkkijkl.fi/coffee/image" alt="Kattila's coffee machines" />
-        <button id="coffee-button">Haluan kahvia</button>
-        <p id="interested">Halukkaat: haetaan...</p>
+        <button id="coffee-button">{{ trans(key="want_coffee", lang=lang) }}</button>
+        <p id="interested">{{ trans(key="interested", lang=lang) }}: {{ trans(key="fetching", lang=lang) }}...</p>
     </div>
     <div class="container" id="seuranta-container">
-        <h2>Kattilassa paikalla:</h2>
+        <h2>{{ trans(key="in_kattila", lang=lang) }}:</h2>
         <ul id="seuranta-list"></ul>
-        <a id="seuranta-join" href="/seuranta">liity seurantaan</a>
+        <a id="seuranta-join" href="{{ get_url(path="@/seuranta.md", lang=lang) }}">seuranta</a>
     </div>
 </div>
 {% endblock content %}
