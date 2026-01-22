@@ -1,0 +1,67 @@
+@use "sass:color"
+@use 'colors'
+
+$header-fg: #fed
+$header-bg: #432
+$header-bg-darken: color.adjust($header-bg, $lightness: -10%)
+
+header
+  color: #fed
+  background: linear-gradient(to bottom, #432 50%, $header-bg-darken 50%, #432)
+  border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color))
+  box-shadow: 0 0 0.3em 0.3em rgba(0, 0, 0, 0.3)
+  padding: 1em
+  overflow: hidden
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  gap: 1em
+  width: 100%
+
+  h1.display
+    text-align: left
+    text-box-edge: ex alphabetic // once this is supported by firefox, use this more widely!
+
+  a:has(img)
+    height: 3em
+  img 
+    height: 3em
+    width: auto
+    filter: drop-shadow(0px 4px 4px var(--box-shadow-color))
+
+  .titlebox 
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-between
+    gap: 0.5em
+
+  menu#lang-selection
+    display: flex
+    flex-direction: row
+
+    a
+      background: linear-gradient(to bottom, white 50%, lightgrey 50%, white)
+      color: #432
+      text-decoration-line: none
+      padding: 0.2em 0.5em 0.5em
+
+      border-top: 1px solid #888
+      border-left: 1px solid #888
+      border-bottom: 1px solid #888
+
+      &:first-child
+        border-top-left-radius: 0.3em
+        border-bottom-left-radius: 0.3em
+
+      &:last-child
+        border-right: 1px solid #888
+        border-top-right-radius: 0.3em
+        border-bottom-right-radius: 0.3em
+
+      &.lang-selected
+        color: white
+        background: linear-gradient(to bottom, #36f 50%, #24d 50%, #36f)
+        border-bottom-color: #aaa
+  

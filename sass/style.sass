@@ -1,5 +1,141 @@
 //   Keep this quote here, see commit beb6f897d1ed17868cddf3bf51ecead3e81491aa
 /*! "Siihen päätökseen olen tullut, että kaikki juominen, yksin vedenkin, on vahingollista. Poikkeuksen tekee vain kahvi."
    - Minna Canth */
+
+@use 'reset'
+@use 'typefaces'
+@use 'colors'
 @use 'theme-selection'
+
+@use 'header'
 @use 'footer'
+
+body 
+    color: var(--main-fg-color)
+    background-color: var(--main-bg-color)
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
+
+#theme-selection 
+    label 
+        text-wrap-mode: nowrap
+
+#seuranta-container 
+    /* Hide container if list has no entries */
+    &:not(:has(#seuranta-list > li)) 
+        display: none
+
+    padding: 0.5em 1em
+    color: var(--main-bg-color)
+    background-color: var(--main-fg-color)
+    border-radius: 20px
+    border: 4px solid var(--border-color)
+    box-shadow: 0 4px 4px var(--box-shadow-color)
+
+    #seuranta-list 
+        li 
+            font-size: 1.5em
+            line-height: 1.4
+            text-align: center
+            list-style: "\2615  " inside
+
+    #seuranta-join 
+        color: var(--seuranta-join-color)
+        margin-top: auto
+        margin-bottom: 0.5em
+        &:visited 
+            color: var(--seuranta-join-visited-color)
+
+#coffee-image 
+    border-radius: 20px
+    border: 4px solid var(--border-color)
+    box-shadow: 0 4px 4px var(--box-shadow-color)
+    max-width: min(98dvw, 1000px)
+    object-view-box: inset(20%)
+
+#coffee-button 
+    background-color: var(--coffee-button-background)
+    background: var(--coffee-button-bottom-glow), linear-gradient(to bottom, var(--coffee-button-bg-dark), var(--coffee-button-background))
+    box-shadow: 0 4px 4px var(--box-shadow-color)
+    border: 4px solid var(--border-color)
+    border-radius: 10px
+    cursor: pointer
+    margin: 1em 1ex
+    padding: 1ex 1em
+    position: relative
+    text-shadow: 0 2px .5em var(--coffee-button-text-shadow-color)
+    transition: all 300ms
+
+    color: #342b22
+    font-family: "Platypi", sans-serif
+    font-weight: 700
+    font-size: 1.5em
+
+    &::after 
+        content: ""
+        position: absolute
+        top: 2px
+        left: 2px
+        width: calc(100% - 4px)
+        height: 40%
+        background: var(--coffee-button-bg-after)
+        border-radius: 4px
+        transition: background 400ms
+
+a:visited 
+    color: var(--a-visited-color)
+    text-decoration-color: var(--a-visited-text-decoration-color)
+
+a.external::after
+    content: "🔗"
+    display: inline-block
+    width: 0.8em
+    height: 0.8em
+    margin-left: 0.25em
+
+.content 
+    display: flex
+    flex-direction: column
+    gap: 1em
+    padding: 2em 0.5em
+
+.flexrow 
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    gap: 0.5em
+    justify-content: center
+    align-items: center
+
+@media all and (min-width: 800px) 
+    .flexrow 
+        display: flex
+        flex-direction: row
+        gap: 1em
+
+@media (width <= 720px) 
+
+    header 
+        padding: 0.5em 1em
+        display: flex
+        flex-direction: column
+        gap: 1em
+
+        .titlebox 
+            column-gap: 1em
+
+        h1.display 
+            font-size: 2em
+
+    .content 
+        padding: 1em 0.25em
