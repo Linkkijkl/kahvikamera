@@ -14,18 +14,28 @@ build_search_index = false
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = false
 
-[languages.fi]
-title = "Kahvikamera"
-
 [languages.fi.translations]
+dark = "Tumma"
+fetching = "Haetaan"
 header_title = "Kattilan kahvikamera"
+in_kattila = "Kattilassa paikalla"
+interested = "Halukkaat"
+light = "Vaalea"
+more_elsewhere = "Sivustosta muualla"
 phone_app = "Puhelinsovellus"
 site_features = "Sivun ominaisuudet"
-
-[languages.en]
-title = "Coffee Camera"
+system = "Järjestelmä"
+want_coffee = "Haluan kahvia"
 
 [languages.en.translations]
+dark = "Dark"
+fetching = "Fetching"
 header_title = "Kattila coffeecam"
+in_kattila = "In Kattila"
+interested = "Interested"
+light = "Light"
+more_elsewhere = "More elsewhere"
 phone_app  = "Phone app"
 site_features = "Site features"
+system = "System"
+want_coffee = "I want coffee"
