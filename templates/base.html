@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ lang }}">
     <head>
-        {%- block head -%}
+        {%- block head %}
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <title>{% block title -%}Kattila{% endblock title -%}</title>
@@ -10,7 +10,51 @@
         <meta name="color-scheme" content="light dark" >
         <link rel="stylesheet" type="text/css" href="{{ get_url(path="/style.css") }}" />
         <link rel="manifest" href="manifest.json" />
-        {%- endblock head -%}
+        {%- if current_url %}
+        {%- if page.extra.open_graph.url %}
+        <meta property="og:url" content="{{ page.extra.open_graph.url | escape_xml | safe }}" />
+        {%- elif section.extra.open_graph.url %}
+        <meta property="og:url" content="{{ section.extra.open_graph.url | escape_xml | safe }}" />
+        {%- else %}
+        <meta property="og:url" content="{{ current_url | escape_xml | safe }}" />
+        {%- endif %}
+        <link rel="canonical" href="{{ current_url | escape_xml | safe }}" />
+        {%- endif %}
+        {%- if page.translations %}
+        {%- for page_translation in page.translations %}
+        {%- if page_translation.lang == lang and config.extra.languages[lang].locale %}
+        <meta property="og:locale" content="{{ config.extra.languages[lang].locale | escape_xml | safe }}" />
+        {%- elif config.extra.languages[page_translation.lang].locale %}
+        <meta property="og:locale:alternate" content="{{
+            config.extra.languages[page_translation.lang].locale | escape_xml | safe }}" />
+        {%- else %}
+        {%- endif %}
+        <link rel="alternate" href="{{ page_translation.permalink | escape_xml | safe }}" hreflang="{%
+            if config.extra.languages[page_translation.lang].hreflang %}{{
+            config.extra.languages[page_translation.lang].hreflang | escape_xml | safe }}{%
+            else %}{{ page_translation.lang | escape_xml | safe }}{% endif %}"{%
+            if config.extra.relative_urls %} data-href="{{
+            _link::rel(dest=page_translation.permalink, cu=_cu, base=_base) }}"{% endif %} />
+        {%- endfor %}
+        {%- endif %}
+        {%- if section.translations %}
+        {%- for section_translation in section.translations %}
+        {%- if section_translation.lang == lang and config.extra.languages[lang].locale %}
+        <meta property="og:locale" content="{{ config.extra.languages[lang].locale | escape_xml | safe }}" />
+        {%- elif config.extra.languages[section_translation.lang].locale %}
+        <meta property="og:locale:alternate" content="{{
+            config.extra.languages[section_translation.lang].locale | escape_xml | safe }}" />
+        {%- else %}
+        {%- endif %}
+        <link rel="alternate" href="{{ section_translation.permalink | escape_xml | safe }}" hreflang="{%
+            if config.extra.languages[section_translation.lang].hreflang %}{{
+            config.extra.languages[section_translation.lang].hreflang | escape_xml | safe }}{%
+            else %}{{ section_translation.lang | escape_xml | safe }}{% endif %}"{%
+            if config.extra.relative_urls %} data-href="{{
+            _link::rel(dest=section_translation.permalink, cu=_cu, base=_base) }}"{% endif %} />
+        {%- endfor %}
+        {%- endif %}
+        {%- endblock head %}
     </head>
     <body>
         <header>
