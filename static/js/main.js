@@ -19,11 +19,7 @@ const updateInterested = () => {
     fetch(interestedAmountEndpoint)
         .then(response => response.text())
         .then(interestedAmount => {
-            if (document.documentElement.lang === "en") {
-                interestedElement.textContent = `Interested: ${interestedAmount}/${interestedMax}`;
-            } else {
-            interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
-            }
+            interestedElement.textContent = `${interestedAmount}/${interestedMax}`;
         });
 };
 
@@ -75,11 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => response.text())
         .then(interestedAmount => {
-            if (document.documentElement.lang === "en") {
-                interestedElement.textContent = `Interested: ${interestedAmount}/${interestedMax}`;
-            } else {
-                interestedElement.textContent = `Halukkaat: ${interestedAmount}/${interestedMax}`;
-            }
+            interestedElement.textContent = `${interestedAmount}/${interestedMax}`;
+
         });
     });
 
