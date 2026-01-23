@@ -30,3 +30,13 @@ more_elsewhere = "More elsewhere"
 phone_app  = "Phone app"
 site_features = "Site features"
 want_coffee = "I want coffee"
+
+[languages.zh.translations]
+fetching = "正在调用API"
+header_title = "Kattila咖啡相机"
+in_kattila = "在Kattila"
+interested = "愿望"
+more_elsewhere = "多关于相机"
+phone_app  = "手机APP"
+site_features = "功能"
+want_coffee = "我要咖啡"

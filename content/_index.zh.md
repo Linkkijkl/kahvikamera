@@ -1,0 +1,3 @@
++++
+template = "coffee-camera.html"
++++
