@@ -7,7 +7,7 @@ $header-bg-darken: color.adjust($header-bg, $lightness: -10%)
 
 header
   color: #fed
-  background: linear-gradient(to bottom, #432 50%, $header-bg-darken 50%, #432)
+  background: linear-gradient(to bottom, $header-bg 50%, $header-bg-darken 50%, $header-bg)
   border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color))
   box-shadow: 0 0 0.3em 0.3em rgba(0, 0, 0, 0.3)
   padding: 1em

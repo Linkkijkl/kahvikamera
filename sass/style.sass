@@ -26,23 +26,19 @@ body
     align-items: center
     text-align: center
 
-#theme-selection 
-    label 
-        text-wrap-mode: nowrap
-
 #seuranta-container 
-    /* Hide container if list has no entries */
+    // Hide container if list has no entries
     &:not(:has(#seuranta-list > li)) 
         display: none
 
     padding: 0.5em 1em
     color: var(--main-bg-color)
     background-color: var(--main-fg-color)
-    border-radius: 20px
-    border: 4px solid var(--border-color)
+    border: 1px solid #222
+    border-radius: 7px
     box-shadow: 0 4px 4px var(--box-shadow-color)
 
-    #seuranta-list 
+    #seuranta-list
         li 
             font-size: 1.5em
             line-height: 1.4
@@ -57,13 +53,13 @@ body
             color: var(--seuranta-join-visited-color)
 
 #coffee-image 
-    border-radius: 20px
-    border: 4px solid var(--border-color)
+    border: 1px solid #222
+    border-radius: 7px
     box-shadow: 0 4px 4px var(--box-shadow-color)
     max-width: min(98dvw, 1000px)
     object-view-box: inset(20%)
 
-#coffee-button 
+#coffee-button
     background: var(--coffee-button-bottom-glow), linear-gradient(to bottom, var(--coffee-button-bg-dark), var(--coffee-button-background))
     box-shadow: 0 4px 4px var(--box-shadow-color)
     border-radius: 6px
@@ -126,7 +122,6 @@ a.external::after
     header 
         padding: 0.5em 1em
         display: flex
-        flex-direction: column
         gap: 1em
 
         .titlebox 
