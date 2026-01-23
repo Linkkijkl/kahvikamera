@@ -61,11 +61,11 @@
             <div class="flexrow titlebox"><a href="{{ get_url(path="@/_index.md", lang=lang) }}"><img src="/icons/kattila_full.svg"></a><h1 class="display">{{ trans(key="header_title", lang=lang) }}</h1></div>
             <menu id="lang-selection">
                 {%- if page.translations -%}
-                    {%- for translation in page.translations -%}
+                    {%- for translation in page.translations | sort(attribute="lang") -%}
                     <a href="{{ translation.permalink }}"{% if translation.lang == lang %} class="lang-selected"{% endif %}>{{ translation.lang }}</a>
                     {%- endfor -%}
                 {%- elif section.translations -%}
-                    {%- for translation in section.translations -%}
+                    {%- for translation in section.translations | sort(attribute="lang") -%}
                     <a href="{{ translation.permalink }}"{% if translation.lang == lang %} class="lang-selected"{% endif %}>{{ translation.lang }}</a>
                     {%- endfor -%}
                 {%- endif -%}
