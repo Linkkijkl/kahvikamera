@@ -40,3 +40,13 @@ more_elsewhere = "多关于相机"
 phone_app  = "手机APP"
 site_features = "功能"
 want_coffee = "我要咖啡"
+
+[languages.ru.translations]
+fetching = "Поиск заинтересованных в кофепитии"
+header_title = "Кофейная камера Kattila"
+in_kattila = "Сейчас на месте"
+interested = "Нуждающиеся в кофе"
+more_elsewhere = "О сайте"
+phone_app = "приложение"
+site_features = "Свойства страницы"
+want_coffee = "Мне нужен кофе"
