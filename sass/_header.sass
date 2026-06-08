@@ -4,10 +4,11 @@
 $header-fg: #fed
 $header-bg: #432
 $header-bg-darken: color.adjust($header-bg, $lightness: -10%)
+$header-bg-lighten: color.adjust($header-bg, $lightness: +20%)
 
 header
   color: #fed
-  background: linear-gradient(to bottom, $header-bg 50%, $header-bg-darken 50%, $header-bg)
+  background: linear-gradient(to bottom, $header-bg-lighten, $header-bg 50%, $header-bg-darken 50%, $header-bg)
   border-bottom: 1px solid color-mix(in srgb, var(--main-fg-color) 60%, var(--main-bg-color))
   box-shadow: 0 0 0.3em 0.3em rgba(0, 0, 0, 0.3)
   padding: 1em
@@ -42,7 +43,7 @@ header
     flex-direction: row
 
     a
-      background: linear-gradient(to bottom, white 50%, lightgrey 50%, white)
+      background: linear-gradient(to bottom, white, color.adjust(white, $lightness: -10%) 50%, lightgrey 50%, white)
       color: #432
       text-decoration-line: none
       padding: 0.1em 0.4em 0.4em
@@ -51,14 +52,16 @@ header
       border-left: 1px solid #888
       border-bottom: 1px solid #888
 
+      --lang-selection-border-radius: 0.3em
+
       &:first-child
-        border-top-left-radius: 0.3em
-        border-bottom-left-radius: 0.3em
+        border-top-left-radius: var(--lang-selection-border-radius)
+        border-bottom-left-radius: var(--lang-selection-border-radius)
 
       &:last-child
         border-right: 1px solid #888
-        border-top-right-radius: 0.3em
-        border-bottom-right-radius: 0.3em
+        border-top-right-radius: var(--lang-selection-border-radius)
+        border-bottom-right-radius: var(--lang-selection-border-radius)
 
       &.lang-selected
         color: white
